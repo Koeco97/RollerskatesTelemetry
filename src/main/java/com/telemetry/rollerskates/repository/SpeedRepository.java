@@ -2,6 +2,9 @@ package com.telemetry.rollerskates.repository;
 
 import com.telemetry.rollerskates.entity.Speed;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.integration.dsl.IntegrationFlow;
+import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +19,13 @@ public class SpeedRepository {
     @Autowired
     public SpeedRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Bean
+    IntegrationFlow fromSpeed() {
+        return IntegrationFlows.from("Speed")
+                .handle(m -> save((Speed) m.getPayload()))
+                .get();
     }
 
     public void save(Speed speed) {

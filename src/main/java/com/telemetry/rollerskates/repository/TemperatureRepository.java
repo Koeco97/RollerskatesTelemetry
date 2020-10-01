@@ -2,6 +2,9 @@ package com.telemetry.rollerskates.repository;
 
 import com.telemetry.rollerskates.entity.Temperature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.integration.dsl.IntegrationFlow;
+import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +19,13 @@ public class TemperatureRepository {
     @Autowired
     public TemperatureRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Bean
+    IntegrationFlow fromTemperature() {
+        return IntegrationFlows.from("Temperature")
+                .handle(m -> save((Temperature) m.getPayload()))
+                .get();
     }
 
     public void save(Temperature temperature) {

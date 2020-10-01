@@ -1,7 +1,7 @@
 package com.telemetry.rollerskates;
 
-import com.telemetry.rollerskates.repository.TemperatureRepository;
 import com.telemetry.rollerskates.entity.Temperature;
+import com.telemetry.rollerskates.repository.TemperatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

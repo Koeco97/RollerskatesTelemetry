@@ -2,6 +2,9 @@ package com.telemetry.rollerskates.repository;
 
 import com.telemetry.rollerskates.entity.Humidity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.integration.dsl.IntegrationFlow;
+import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +19,13 @@ public class HumidityRepository {
     @Autowired
     public HumidityRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Bean
+    IntegrationFlow fromHumidity() {
+        return IntegrationFlows.from("Humidity")
+                .handle(m -> save((Humidity) m.getPayload()))
+                .get();
     }
 
     public void save(Humidity humidity) {
