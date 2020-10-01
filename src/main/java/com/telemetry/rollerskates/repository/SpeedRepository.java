@@ -1,4 +1,4 @@
-package com.telemetry.rollerskates.Repository;
+package com.telemetry.rollerskates.repository;
 
 import com.telemetry.rollerskates.entity.Speed;
 import org.springframework.beans.factory.annotation.Autowired;

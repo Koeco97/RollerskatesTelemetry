@@ -1,9 +1,9 @@
 package com.telemetry.rollerskates;
 
-import com.telemetry.rollerskates.Repository.HumidityRepository;
-import com.telemetry.rollerskates.Repository.PressureRepository;
-import com.telemetry.rollerskates.Repository.SpeedRepository;
-import com.telemetry.rollerskates.Repository.TemperatureRepository;
+import com.telemetry.rollerskates.repository.HumidityRepository;
+import com.telemetry.rollerskates.repository.PressureRepository;
+import com.telemetry.rollerskates.repository.SpeedRepository;
+import com.telemetry.rollerskates.repository.TemperatureRepository;
 import com.telemetry.rollerskates.entity.Humidity;
 import com.telemetry.rollerskates.entity.Pressure;
 import com.telemetry.rollerskates.entity.Speed;
