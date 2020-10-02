@@ -27,7 +27,6 @@ public class HumidityRepository implements BaseRepository {
         Humidity humidity = (Humidity)baseDetector;
         jdbcTemplate.update("insert into detectors.humidity (value, measure, date_time) values (?, ?, ?)",
                 humidity.getHumidity(), humidity.getMeasure(), LocalDateTime.now());
-       // System.out.println(getMeasure("2020-09-29","2020-10-03"));
     }
 
     public List<BaseDetector> getMeasure(String start, String end) {
