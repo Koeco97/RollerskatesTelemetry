@@ -1,6 +1,8 @@
-package com.telemetry.rollerskates.repository;
+package com.telemetry.rollerskates.repository.Impl;
 
+import com.telemetry.rollerskates.entity.BaseDetector;
 import com.telemetry.rollerskates.entity.Pressure;
+import com.telemetry.rollerskates.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.dsl.IntegrationFlow;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class PressureRepository {
+public class PressureRepository implements BaseRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -21,26 +23,23 @@ public class PressureRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Bean
-    IntegrationFlow fromPressure() {
-        return IntegrationFlows.from("Pressure")
-                .handle(m -> save((Pressure) m.getPayload()))
-                .get();
-    }
 
-    public void save(Pressure pressure) {
+
+    public void save(BaseDetector baseDetector) {
+        Pressure pressure = (Pressure)baseDetector;
         jdbcTemplate.update("insert into detectors.pressure (value, measure, date_time) values (?, ?, ?)",
                 pressure.getPressure(), pressure.getMeasure(), LocalDateTime.now());
     }
 
-    public List<Pressure> getPressure(String start, String end) {
+    public List<BaseDetector> getMeasure(String start, String end) {
         String query = "SELECT * FROM detectors.pressure WHERE date_time " +
                 "BETWEEN '" + start + "' AND '" + end + "'";
-        List<Pressure> result = new ArrayList<>();
+        List<BaseDetector> result = new ArrayList<>();
         result.addAll(jdbcTemplate.query(query, new Object[]{}, ((resultSet, i) -> {
             Pressure pressure = new Pressure();
             pressure.setPressure(resultSet.getFloat("value"));
             pressure.setMeasure(resultSet.getString("measure"));
+            pressure.setTimestamp(resultSet.getTimestamp("date_time").toLocalDateTime());
             return pressure;
         })));
         return result;

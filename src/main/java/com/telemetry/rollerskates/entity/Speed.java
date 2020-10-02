@@ -1,14 +1,8 @@
 package com.telemetry.rollerskates.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
-public class Speed {
+public class Speed extends BaseDetector {
     private Float speed;
-    private String measure;
-    @JsonIgnore
-    private LocalDateTime dateTime;
 }

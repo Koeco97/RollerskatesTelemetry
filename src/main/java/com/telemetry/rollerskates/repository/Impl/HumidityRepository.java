@@ -1,6 +1,8 @@
-package com.telemetry.rollerskates.repository;
+package com.telemetry.rollerskates.repository.Impl;
 
+import com.telemetry.rollerskates.entity.BaseDetector;
 import com.telemetry.rollerskates.entity.Humidity;
+import com.telemetry.rollerskates.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.dsl.IntegrationFlow;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class HumidityRepository {
+public class HumidityRepository implements BaseRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -21,26 +23,21 @@ public class HumidityRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Bean
-    IntegrationFlow fromHumidity() {
-        return IntegrationFlows.from("Humidity")
-                .handle(m -> save((Humidity) m.getPayload()))
-                .get();
-    }
-
-    public void save(Humidity humidity) {
+    public void save(BaseDetector baseDetector) {
+        Humidity humidity = (Humidity)baseDetector;
         jdbcTemplate.update("insert into detectors.humidity (value, measure, date_time) values (?, ?, ?)",
                 humidity.getHumidity(), humidity.getMeasure(), LocalDateTime.now());
     }
 
-    public List<Humidity> getHumidity(String start, String end) {
+    public List<BaseDetector> getMeasure(String start, String end) {
         String query = "SELECT * FROM detectors.humidity WHERE date_time " +
                 "BETWEEN '" + start + "' AND '" + end + "'";
-        List<Humidity> result = new ArrayList<>();
+        List<BaseDetector> result = new ArrayList<>();
         result.addAll(jdbcTemplate.query(query, new Object[]{}, ((resultSet, i) -> {
             Humidity humidity = new Humidity();
             humidity.setHumidity(resultSet.getFloat("value"));
             humidity.setMeasure(resultSet.getString("measure"));
+            humidity.setTimestamp(resultSet.getTimestamp("date_time").toLocalDateTime());
             return humidity;
         })));
         return result;

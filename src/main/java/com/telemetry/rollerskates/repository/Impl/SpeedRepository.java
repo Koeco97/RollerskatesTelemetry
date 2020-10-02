@@ -1,6 +1,8 @@
-package com.telemetry.rollerskates.repository;
+package com.telemetry.rollerskates.repository.Impl;
 
+import com.telemetry.rollerskates.entity.BaseDetector;
 import com.telemetry.rollerskates.entity.Speed;
+import com.telemetry.rollerskates.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.dsl.IntegrationFlow;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class SpeedRepository {
+public class SpeedRepository implements BaseRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -21,26 +23,21 @@ public class SpeedRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Bean
-    IntegrationFlow fromSpeed() {
-        return IntegrationFlows.from("Speed")
-                .handle(m -> save((Speed) m.getPayload()))
-                .get();
-    }
-
-    public void save(Speed speed) {
+    public void save(BaseDetector baseDetector) {
+        Speed speed = (Speed)baseDetector;
         jdbcTemplate.update("insert into detectors.speed (value, measure, date_time) values (?, ?, ?)",
                 speed.getSpeed(), speed.getMeasure(), LocalDateTime.now());
     }
 
-    public List<Speed> getSpeed(String start, String end) {
+    public List<BaseDetector> getMeasure(String start, String end) {
         String query = "SELECT * FROM detectors.speed WHERE date_time " +
                 "BETWEEN '" + start + "' AND '" + end + "'";
-        List<Speed> result = new ArrayList<>();
+        List<BaseDetector> result = new ArrayList<>();
         result.addAll(jdbcTemplate.query(query, new Object[]{}, ((resultSet, i) -> {
             Speed speed = new Speed();
             speed.setSpeed(resultSet.getFloat("value"));
             speed.setMeasure(resultSet.getString("measure"));
+            speed.setTimestamp(resultSet.getTimestamp("date_time").toLocalDateTime());
             return speed;
         })));
         return result;

@@ -4,6 +4,10 @@ import com.telemetry.rollerskates.entity.Humidity;
 import com.telemetry.rollerskates.entity.Pressure;
 import com.telemetry.rollerskates.entity.Speed;
 import com.telemetry.rollerskates.entity.Temperature;
+import com.telemetry.rollerskates.repository.Impl.HumidityRepository;
+import com.telemetry.rollerskates.repository.Impl.PressureRepository;
+import com.telemetry.rollerskates.repository.Impl.SpeedRepository;
+import com.telemetry.rollerskates.repository.Impl.TemperatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +25,14 @@ public class KafkaFlow {
     private ConsumerFactory consumerFactory;
     @Autowired
     private KafkaHandler kafkaHandler;
+    @Autowired
+    private TemperatureRepository temperatureRepository;
+    @Autowired
+    private HumidityRepository humidityRepository;
+    @Autowired
+    private PressureRepository pressureRepository;
+    @Autowired
+    private SpeedRepository speedRepository;
 
     @Bean
     IntegrationFlow fromKafka() {
@@ -31,6 +43,34 @@ public class KafkaFlow {
                         .channelMapping(Speed.class, "Speed")
                         .channelMapping(Pressure.class, "Pressure")
                         .channelMapping(Humidity.class, "Humidity"))
+                .get();
+    }
+
+    @Bean
+    IntegrationFlow fromTemperature() {
+        return IntegrationFlows.from("Temperature")
+                .handle(m -> temperatureRepository.save((Temperature) m.getPayload()))
+                .get();
+    }
+
+    @Bean
+    IntegrationFlow fromHumidity() {
+        return IntegrationFlows.from("Humidity")
+                .handle(m -> humidityRepository.save((Humidity) m.getPayload()))
+                .get();
+    }
+
+    @Bean
+    IntegrationFlow fromPressure() {
+        return IntegrationFlows.from("Pressure")
+                .handle(m -> pressureRepository.save((Pressure) m.getPayload()))
+                .get();
+    }
+
+    @Bean
+    IntegrationFlow fromSpeed() {
+        return IntegrationFlows.from("Speed")
+                .handle(m -> speedRepository.save((Speed) m.getPayload()))
                 .get();
     }
 }
