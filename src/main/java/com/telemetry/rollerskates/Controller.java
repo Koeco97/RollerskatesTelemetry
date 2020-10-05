@@ -1,29 +1,32 @@
 package com.telemetry.rollerskates;
 
 import com.telemetry.rollerskates.entity.BaseDetector;
-import com.telemetry.rollerskates.entity.Temperature;
-import com.telemetry.rollerskates.repository.Impl.TemperatureRepository;
+import com.telemetry.rollerskates.repository.Impl.MeasureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class Controller {
     @Autowired
-    private TemperatureRepository temperatureRepository;
+    private MeasureRepository measureRepository;
+    private static final String ENTITY_PACKAGE = "com.telemetry.rollerskates.entity.";
 
 
-    @GetMapping(value = "/{temperature}")
-    public List<BaseDetector> getTemperature(@RequestParam(required = false) String start,
+    @GetMapping(value = "/{detectorType}")
+    public List<BaseDetector> getTemperature(@PathVariable("detectorType") String detectorType, @RequestParam(required = false) String start,
                                              @RequestParam(required = false) String end) {
-        return temperatureRepository.getMeasure(start, end);
-    }
-
-    @GetMapping(value = "/")
-    public String getHome() {
-        return "index";
+        List<BaseDetector> result = new ArrayList<>();
+        try {
+            result = measureRepository.getMeasure(start, end, Class.forName(ENTITY_PACKAGE + detectorType));
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

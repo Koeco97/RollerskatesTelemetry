@@ -6,7 +6,6 @@ import com.telemetry.rollerskates.entity.Humidity;
 import com.telemetry.rollerskates.entity.Pressure;
 import com.telemetry.rollerskates.entity.Speed;
 import com.telemetry.rollerskates.entity.Temperature;
-import lombok.SneakyThrows;
 import org.springframework.integration.endpoint.MessageProducerSupport;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;

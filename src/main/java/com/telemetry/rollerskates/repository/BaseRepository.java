@@ -5,7 +5,8 @@ import com.telemetry.rollerskates.entity.BaseDetector;
 
 import java.util.List;
 
-public interface BaseRepository{
-    void save(BaseDetector baseDetector);
-    List<BaseDetector> getMeasure(String start, String end);
+public interface BaseRepository<T extends BaseDetector> {
+    void save(T detector);
+
+    List<BaseDetector> getMeasure(String start, String end, Class type);
 }
