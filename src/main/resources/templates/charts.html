@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chart form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<div style="width:800px;height:650px; margin: auto">
+    <canvas id="line-chart-temperature"></canvas>
+    <script th:inline="javascript">
+        new Chart(document.getElementById("line-chart-temperature"), {
+            type: 'line',
+            data: {
+                labels: [[${TemperatureLabels}]],
+                datasets: [{
+                    label: "Temperature (" + [[${TemperatureMeasure}]] +")",
+                    data: [[${TemperatureDataPointsList}]],
+                    backgroundColor: 'rgba(54, 162, 235, 0)',
+                    borderColor: "#3e95cd",
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+</div>
+<div style="width:800px;height:650px; margin: auto">
+    <canvas id="line-chart-humidity"></canvas>
+    <script th:inline="javascript">
+        new Chart(document.getElementById("line-chart-humidity"), {
+            type: 'line',
+            data: {
+                labels: [[${HumidityLabels}]],
+                datasets: [{
+                    label: "Humidity (" + [[${HumidityMeasure}]] +")",
+                    data: [[${HumidityDataPointsList}]],
+                    backgroundColor: 'rgba(54, 162, 235, 0)',
+                    borderColor: "#3e95cd",
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+</div>
+<div style="width:800px;height:650px; margin: auto">
+    <canvas id="line-chart-pressure"></canvas>
+    <script th:inline="javascript">
+        new Chart(document.getElementById("line-chart-pressure"), {
+            type: 'line',
+            data: {
+                labels: [[${PressureLabels}]],
+                datasets: [{
+                    label: "Pressure (" + [[${PressureMeasure}]] +")",
+                    data: [[${PressureDataPointsList}]],
+                    backgroundColor: 'rgba(54, 162, 235, 0)',
+                    borderColor: "#3e95cd",
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+</div>
+<div style="width:800px;height:650px; margin: auto">
+    <canvas id="line-chart-speed"></canvas>
+    <script th:inline="javascript">
+        new Chart(document.getElementById("line-chart-speed"), {
+            type: 'line',
+            data: {
+                labels: [[${SpeedLabels}]],
+                datasets: [{
+                    label: "Speed (" + [[${SpeedMeasure}]] +")",
+                    data: [[${SpeedDataPointsList}]],
+                    backgroundColor: 'rgba(54, 162, 235, 0)',
+                    borderColor: "#3e95cd",
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+</div>

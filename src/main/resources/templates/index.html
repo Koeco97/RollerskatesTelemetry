@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chart form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<form class="form" th:action="@{/}" th:object="${chartForm}" method="post">
+    <h1 class="form_title" style="text-align: center">Roller skates telemetry</h1>
+    <div class="form_group">
+        <label>Start:</label>
+        <input class="form_input" type="date" th:field="*{start}"/>
+    </div>
+    <div class="form_group">
+        <label>End:</label>
+        <input class="form_input" type="date" th:field="*{end}"/>
+    </div>
+    <button class="form_button">submit</button>
+</form>
+</body>
+</html>
