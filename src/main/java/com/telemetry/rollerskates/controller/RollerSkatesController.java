@@ -58,7 +58,6 @@ public class RollerSkatesController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println(result);
         ArrayList<Map<Object, Object>> dataPoints = new ArrayList<Map<Object, Object>>();
         List<String> labels = new ArrayList<>();
         for (BaseDetector baseDetector : result) {
