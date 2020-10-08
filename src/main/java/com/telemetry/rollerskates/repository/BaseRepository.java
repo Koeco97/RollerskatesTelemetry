@@ -8,5 +8,5 @@ import java.util.List;
 public interface BaseRepository<T extends BaseDetector> {
     void save(T detector);
 
-    List<BaseDetector> getMeasure(String start, String end, Class type);
+    List<T> getMeasure(String start, String end, Class type);
 }

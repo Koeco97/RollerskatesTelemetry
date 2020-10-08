@@ -1,7 +1,7 @@
-package com.telemetry.rollerskates;
+package com.telemetry.rollerskates.controller;
 
 import com.telemetry.rollerskates.entity.BaseDetector;
-import com.telemetry.rollerskates.repository.Impl.MeasureRepository;
+import com.telemetry.rollerskates.repository.impl.MeasureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class Controller {
+public class RollerSkatesRestController {
     @Autowired
     private MeasureRepository measureRepository;
     private static final String ENTITY_PACKAGE = "com.telemetry.rollerskates.entity.";
 
 
     @GetMapping(value = "/{detectorType}")
-    public List<BaseDetector> getTemperature(@PathVariable("detectorType") String detectorType, @RequestParam(required = false) String start,
-                                             @RequestParam(required = false) String end) {
+    public List<BaseDetector> getMeasure(@PathVariable("detectorType") String detectorType, @RequestParam(required = false) String start,
+                                         @RequestParam(required = false) String end) {
         List<BaseDetector> result = new ArrayList<>();
         try {
             result = measureRepository.getMeasure(start, end, Class.forName(ENTITY_PACKAGE + detectorType));

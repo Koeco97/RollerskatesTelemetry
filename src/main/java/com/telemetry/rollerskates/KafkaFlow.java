@@ -1,7 +1,7 @@
 package com.telemetry.rollerskates;
 
 import com.telemetry.rollerskates.entity.BaseDetector;
-import com.telemetry.rollerskates.repository.Impl.MeasureRepository;
+import com.telemetry.rollerskates.repository.impl.MeasureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
