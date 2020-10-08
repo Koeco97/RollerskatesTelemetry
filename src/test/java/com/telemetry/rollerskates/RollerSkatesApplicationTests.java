@@ -9,5 +9,4 @@ class RollerSkatesApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

@@ -50,7 +50,7 @@ public class RollerSkatesController {
         return "charts";
     }
 
-    public ModelMap getChart(String start, String end, String type) {
+    private ModelMap getChart(String start, String end, String type) {
         ModelMap modelMap = new ModelMap();
         List<BaseDetector> result = new ArrayList<>();
         try {

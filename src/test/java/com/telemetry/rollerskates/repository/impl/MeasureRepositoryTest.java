@@ -2,6 +2,7 @@ package com.telemetry.rollerskates.repository.impl;
 
 import com.telemetry.rollerskates.entity.Pressure;
 import com.telemetry.rollerskates.entity.Temperature;
+import junit.runner.Version;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.jdbc.core.JdbcTemplate;
