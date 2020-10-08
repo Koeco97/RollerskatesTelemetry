@@ -1,20 +1,16 @@
 package com.telemetry.rollerskates.controller;
 
-import com.telemetry.rollerskates.entity.Temperature;
 import com.telemetry.rollerskates.repository.impl.MeasureRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
-import java.util.List;
-
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class RollerSkatesControllerTest {

@@ -22,7 +22,7 @@
     font-family: sans-serif;
     letter-spacing: 1px;
     font-size: 16px;
-    color :#fff ;
+    color: #fff;
     background-color: #0071f0;
     outline: none;
     cursor: pointer;
@@ -48,12 +48,12 @@
 }
 
 .form_button:focus,
-.form_button:hover{
+.form_button:hover {
     background-color: rgba(0, 113, 240, 0.7);
 }
 
 .form_input:focus,
-.form_input:hover{
+.form_input:hover {
     border: 1px solid #1a73a8;
 }
 

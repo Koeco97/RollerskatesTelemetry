@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Chart form</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
 <div style="width:800px;height:650px; margin: auto">
@@ -13,7 +13,7 @@
             data: {
                 labels: [[${TemperatureLabels}]],
                 datasets: [{
-                    label: "Temperature (" + [[${TemperatureMeasure}]] +")",
+                    label: "Temperature (" + [[${TemperatureMeasure}]] + ")",
                     data: [[${TemperatureDataPointsList}]],
                     backgroundColor: 'rgba(54, 162, 235, 0)',
                     borderColor: "#3e95cd",
@@ -31,7 +31,7 @@
             data: {
                 labels: [[${HumidityLabels}]],
                 datasets: [{
-                    label: "Humidity (" + [[${HumidityMeasure}]] +")",
+                    label: "Humidity (" + [[${HumidityMeasure}]] + ")",
                     data: [[${HumidityDataPointsList}]],
                     backgroundColor: 'rgba(54, 162, 235, 0)',
                     borderColor: "#3e95cd",
@@ -49,7 +49,7 @@
             data: {
                 labels: [[${PressureLabels}]],
                 datasets: [{
-                    label: "Pressure (" + [[${PressureMeasure}]] +")",
+                    label: "Pressure (" + [[${PressureMeasure}]] + ")",
                     data: [[${PressureDataPointsList}]],
                     backgroundColor: 'rgba(54, 162, 235, 0)',
                     borderColor: "#3e95cd",
@@ -67,7 +67,7 @@
             data: {
                 labels: [[${SpeedLabels}]],
                 datasets: [{
-                    label: "Speed (" + [[${SpeedMeasure}]] +")",
+                    label: "Speed (" + [[${SpeedMeasure}]] + ")",
                     data: [[${SpeedDataPointsList}]],
                     backgroundColor: 'rgba(54, 162, 235, 0)',
                     borderColor: "#3e95cd",
