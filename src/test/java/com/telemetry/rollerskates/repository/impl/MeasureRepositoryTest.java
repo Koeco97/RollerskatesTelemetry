@@ -2,8 +2,11 @@ package com.telemetry.rollerskates.repository.impl;
 
 import com.telemetry.rollerskates.entity.Pressure;
 import com.telemetry.rollerskates.entity.Temperature;
+import junit.runner.Version;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -46,11 +49,12 @@ class MeasureRepositoryTest {
 
     @Test
     void save() {
+        System.out.println("JUnit version is: " + Version.id());
         Temperature temperature = new Temperature();
         temperature.setTemperature(30f);
         temperature.setMeasure("Celsius");
         measureRepository.save(temperature);
-        Mockito.verify(jdbcTemplate).update("insert into detectors.temperature (value, measure, date_time) values (?, ?, ?)",
-                30f, "Celsius", LocalDate.now());
+        Mockito.verify(jdbcTemplate, Mockito.times(1)).update(Mockito.eq("insert into detectors.temperature (value, measure, date_time) values (?, ?, ?)"),
+                Mockito.eq(30f), Mockito.eq("Celsius"), Mockito.any());
     }
 }

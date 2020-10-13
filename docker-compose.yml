@@ -11,6 +11,7 @@ services:
       - POSTGRES_PASSWORD=1234
       - POSTGRES_USER=postgres
       - POSTGRES_DB=roller_skates_telemetry
+      - TZ=Europe/Moscow
     restart: unless-stopped
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -38,7 +39,7 @@ services:
     restart: unless-stopped
     environment:
       SPRING_KAFKA_BOOTSTRAP-SERVERS: kafka:9092
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/roller_skates_telemetry
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/roller_skates_telemetry?serverTimezone=Europe/Moscow
     depends_on:
       - db
       - zookeeper

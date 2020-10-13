@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class MeasureRepository implements BaseRepository {
             field.setAccessible(true);
             Float value = (Float) field.get(detector);
             jdbcTemplate.update("insert into detectors." + name + " (value, measure, date_time) values (?, ?, ?)",
-                    value, detector.getMeasure(), LocalDate.now());
+                    value, detector.getMeasure(), LocalDateTime.now());
             logger.info(name + " is saved into data base");
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
