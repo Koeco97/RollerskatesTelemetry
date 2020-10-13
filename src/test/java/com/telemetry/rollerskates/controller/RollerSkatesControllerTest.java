@@ -44,7 +44,7 @@ class RollerSkatesControllerTest {
         ChartForm chartForm = new ChartForm();
         chartForm.start = "2020-10-07";
         chartForm.end = "2020-10-08";
-        String redirect = "redirect:/chart?start=" + chartForm.getStart() + "&end=" + chartForm.end;
+        String redirect = "redirect:/chart?start=" + chartForm.getStart()+" 00:00" + "&end=" + chartForm.end+" 23:59";
         assertEquals(redirect, rollerSkatesController.submitForm(chartForm));
     }
 
@@ -64,7 +64,7 @@ class RollerSkatesControllerTest {
         temperature.setTimestamp(LocalDateTime.now());
         temperature.setMeasure("Celcius");
         temperature.setTemperature(30.0f);
-        List temperatureList = List.of(temperature); 
+        List temperatureList = List.of(temperature);
         Mockito.when(measureRepository.getMeasure(start, end, Temperature.class)).thenReturn(temperatureList);
         Humidity humidity = new Humidity();
         humidity.setTimestamp(LocalDateTime.now());

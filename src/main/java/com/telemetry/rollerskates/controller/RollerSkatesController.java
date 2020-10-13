@@ -37,7 +37,7 @@ public class RollerSkatesController {
         if (chartForm.start.equals("") || chartForm.end.equals("")) {
             return "index";
         }
-        return "redirect:/chart?start=" + chartForm.getStart() + "&end=" + chartForm.end;
+        return "redirect:/chart?start=" + chartForm.getStart()+" 00:00" + "&end=" + chartForm.end+" 23:59";
     }
 
     @GetMapping(value = "/chart")
@@ -77,12 +77,17 @@ public class RollerSkatesController {
             Map<Object, Object> map = new HashMap<>();
             map.put("t", baseDetector.getTimestamp().atOffset(ZoneOffset.UTC).toInstant().toEpochMilli());
             map.put("y", value);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
             labels.add(formatter.format(baseDetector.getTimestamp()));
             dataPoints.add(map);
         }
         modelMap.addAttribute(type + "DataPointsList", dataPoints);
-        modelMap.addAttribute(type + "Measure", result.get(0).getMeasure().trim());
+        if (!result.isEmpty()) {
+            modelMap.addAttribute(type + "Measure", result.get(0).getMeasure().trim());
+        }
+        else{
+            modelMap.addAttribute(type + "Measure", "");
+        }
         modelMap.addAttribute(type + "Labels", labels);
         return modelMap;
     }
