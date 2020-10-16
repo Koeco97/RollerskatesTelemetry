@@ -20,7 +20,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static ch.qos.logback.core.joran.util.beans.BeanUtil.isSetter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,7 +43,7 @@ class RollerSkatesControllerTest {
         ChartForm chartForm = new ChartForm();
         chartForm.start = "2020-10-07";
         chartForm.end = "2020-10-08";
-        String redirect = "redirect:/chart?start=" + chartForm.getStart()+" 00:00" + "&end=" + chartForm.end+" 23:59";
+        String redirect = "redirect:/chart?start=" + chartForm.getStart() + " 00:00" + "&end=" + chartForm.end + " 23:59";
         assertEquals(redirect, rollerSkatesController.submitForm(chartForm));
     }
 
@@ -100,7 +99,7 @@ class RollerSkatesControllerTest {
         ModelMap result;
         Method[] methods = RollerSkatesController.class.getDeclaredMethods();
         for (Method method : methods) {
-            if (method.getName().contains("getChart")){
+            if (method.getName().contains("getChart")) {
                 try {
                     method.setAccessible(true);
                     result = (ModelMap) method.invoke(rollerSkatesController, start, end, "Temperature");

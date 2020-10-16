@@ -75,7 +75,7 @@ public class RollerSkatesController {
                 e.printStackTrace();
             }
             Map<Object, Object> map = new HashMap<>();
-            map.put("t", baseDetector.getTimestamp().atOffset(ZoneOffset.UTC).toInstant().toEpochMilli());
+            map.put("t", baseDetector.getTimestamp().atOffset(ZoneOffset.of("+03:00")).toInstant().toEpochMilli());
             map.put("y", value);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
             labels.add(formatter.format(baseDetector.getTimestamp()));

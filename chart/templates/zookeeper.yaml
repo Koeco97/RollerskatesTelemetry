@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.zookeeper.labels }}
+  name: {{ .Values.zookeeper.name }}
+spec:
+  replicas: {{ .Values.zookeeper.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.zookeeper.labels }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.zookeeper.labels }}
+    spec:
+      containers:
+      - image: wurstmeister/zookeeper
+        name: {{ .Values.zookeeper.name }}
+        ports:
+        - containerPort: {{ .Values.zookeeper.port }}
+      restartPolicy: {{ .Values.zookeeper.restartPolicy }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.zookeeper.labels }}
+  name: {{ .Values.zookeeper.name }}
+spec:
+  ports:
+    - name: "port"
+      port: {{ .Values.zookeeper.port }}
+      targetPort: {{ .Values.zookeeper.port }}
+  selector:
+    app: {{ .Values.zookeeper.name }}
+  type: {{ .Values.zookeeper.type }}

@@ -5,12 +5,9 @@ import com.telemetry.rollerskates.entity.Temperature;
 import junit.runner.Version;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
-import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.mockito.ArgumentMatchers;
