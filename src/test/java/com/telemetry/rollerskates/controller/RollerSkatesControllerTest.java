@@ -35,7 +35,7 @@ class RollerSkatesControllerTest {
 
     @Test
     void index() {
-        assertEquals("getIndexPage", rollerSkatesController.getIndexPage(model));
+        assertEquals("index", rollerSkatesController.getIndexPage(model));
     }
 
     @Test
@@ -52,7 +52,7 @@ class RollerSkatesControllerTest {
         ChartForm chartForm = new ChartForm();
         chartForm.start = "";
         chartForm.end = "";
-        assertEquals("getIndexPage", rollerSkatesController.submitForm(chartForm));
+        assertEquals("index", rollerSkatesController.submitForm(chartForm));
     }
 
     @Test
