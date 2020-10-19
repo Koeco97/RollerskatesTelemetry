@@ -19,14 +19,14 @@ public class KafkaHandler extends MessageProducerSupport implements MessageHandl
     Logger logger = LoggerFactory.getLogger(KafkaHandler.class);
 
     private static final String ENTITY_PACKAGE = "com.telemetry.rollerskates.entity.";
-    private static final List<String> types = List.of("Temperature", "Humidity", "Pressure", "Speed");
+    private static final List<String> TYPES = List.of("Temperature", "Humidity", "Pressure", "Speed");
 
     @Override
     public void handleMessage(Message<?> message) throws MessagingException {
         String data = message.getPayload().toString();
         String classType = null;
 
-        for (String type : types) {
+        for (String type : TYPES) {
             if (data.contains(type.toLowerCase())) {
                 classType = type;
                 logger.info(type + " is detected");

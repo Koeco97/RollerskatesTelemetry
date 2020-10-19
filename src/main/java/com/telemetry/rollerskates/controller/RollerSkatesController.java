@@ -24,10 +24,10 @@ public class RollerSkatesController {
     @Autowired
     private MeasureRepository measureRepository;
     private static final String ENTITY_PACKAGE = "com.telemetry.rollerskates.entity.";
-    private static final List<String> types = List.of("Temperature", "Humidity", "Pressure", "Speed");
+    private static final List<String> TYPES = List.of("Temperature", "Humidity", "Pressure", "Speed");
 
     @GetMapping(value = "/")
-    public String index(Model model) {
+    public String getIndexPage(Model model) {
         model.addAttribute("chartForm", new ChartForm());
         return "index";
     }
@@ -44,7 +44,7 @@ public class RollerSkatesController {
     public String getAllCharts(@RequestParam(required = false) String start,
                                @RequestParam(required = false) String end,
                                ModelMap modelMap) {
-        for (String type : types) {
+        for (String type : TYPES) {
             modelMap.addAllAttributes(getChart(start, end, type));
         }
         return "charts";
