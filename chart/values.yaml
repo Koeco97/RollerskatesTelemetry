@@ -1,0 +1,35 @@
+app:
+  name: rollerskatestelemetry
+  labels: rollerskatestelemetry
+  replicas: 1
+  port: 8080
+  restartPolicy: Always
+  type: LoadBalancer
+
+kafka:
+  fullnameOverride: kafka
+  replicas: 1
+  topics:
+    - name: topic1
+      partitions: 1
+      replicationFactor: 1
+      reassignPartitions: true
+
+postgresql:
+  fullnameOverride: postgres
+  postgresqlPassword: "1234"
+  postgresqlDatabase: roller_skates_telemetry
+  initdbScripts:
+    init.sql: "CREATE SCHEMA DETECTORS;\r\n\r\nCREATE TABLE DETECTORS.TEMPERATURE(\r\n
+          \                         ID SERIAL PRIMARY KEY,\r\n                          VALUE
+          FLOAT(20) NOT NULL,\r\n                          MEASURE CHAR(20) NOT NULL,\r\n
+          \                         DATE_TIME TIMESTAMP NOT NULL\r\n);\r\n\r\nCREATE TABLE
+          DETECTORS.HUMIDITY(\r\n                       ID SERIAL PRIMARY KEY,\r\n                       VALUE
+          FLOAT(20) NOT NULL,\r\n                       MEASURE CHAR(20) NOT NULL,\r\n
+          \                      DATE_TIME TIMESTAMP NOT NULL\r\n);\r\n\r\nCREATE TABLE
+          DETECTORS.PRESSURE(\r\n                       ID SERIAL PRIMARY KEY,\r\n                       VALUE
+          FLOAT(20) NOT NULL,\r\n                       MEASURE CHAR(20) NOT NULL,\r\n
+          \                      DATE_TIME TIMESTAMP NOT NULL\r\n);\r\n\r\nCREATE TABLE
+          DETECTORS.SPEED(\r\n                    ID SERIAL PRIMARY KEY,\r\n                    VALUE
+          FLOAT(20) NOT NULL,\r\n                    MEASURE CHAR(20) NOT NULL,\r\n                    DATE_TIME
+          TIMESTAMP NOT NULL\r\n)"

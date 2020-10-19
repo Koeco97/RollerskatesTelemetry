@@ -1,0 +1,9 @@
+dependencies:
+- name: kafka
+  repository: http://storage.googleapis.com/kubernetes-charts-incubator/
+  version: 0.21.2
+- name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 9.8.4
+digest: sha256:63e18fde7840b11dbcda6e9f371bebc8f8ee68193c98c72015ec724da01a9d1a
+generated: "2020-10-16T16:46:24.079612+03:00"

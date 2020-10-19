@@ -1,0 +1,12 @@
+apiVersion: v2
+name: chart
+description: A Helm chart for Kubernetes
+type: application
+version: 0.1.0
+dependencies:
+  - name: kafka
+    version: 0.21.2
+    repository: http://storage.googleapis.com/kubernetes-charts-incubator/
+  - name: postgresql
+    version: 9.8.4
+    repository: https://charts.bitnami.com/bitnami
